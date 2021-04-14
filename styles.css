@@ -1,0 +1,66 @@
+#runButtonWrapper {
+    display: inline;
+}
+
+#runButton {
+    border: 1px solid lightgray;
+    background-color: #f2f2f2;
+    border-radius: 6px;
+    font-size: 15px;
+    padding: 10px 20px;
+    color: #18c468;
+    transition-duration: 0.4s;
+}
+  
+#runButton:hover {
+background-color: #18c468; /* Green */
+color: white;
+}
+
+#editorWrapper {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    text-align: center;
+    left: 0px;
+    right: 0px;
+    margin: 20px 5px 5px 5px;
+}
+#editor {
+    position: absolute;
+    box-sizing: border-box;
+    border: 1px solid lightgray;
+    border-radius: 6px;
+    font-size: 15px;
+    top: 50px;
+    bottom: 50%;
+    width: 100%;
+}
+
+/* Hacky solution for coloring error messages */
+::placeholder {
+    opacity: 1;
+    color: #ff1c55;
+}
+#outputWrapper {
+    width: 100%;
+    position: absolute;
+    bottom: 4px;
+    top: 50%;
+}
+
+#output {
+    height: 100%;
+    width: 100%;
+    border: 1px solid #171924;
+    border-radius: 6px;
+    padding: 1em 2em;
+    margin-top: 5px !important;
+    font-size: 15px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    resize: none;
+    background-color: #171924;
+    color: white;
+}

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="styles.css">
+        <script src="https://cdn.jsdelivr.net/gh/pythonpad/brython-runner/lib/brython-runner.bundle.js"></script>
+    </head>    
+    <body>
+            <div id='editorWrapper'>
+                <div id='runButtonWrapper'>
+                    <button id='runButton' onclick='runner.runCode(editor.getValue())'>Run&nbsp;&nbsp;▶</button>
+                </div>
+                <div id="editor"># CS Explore Day: Escape Room
+# Hosted by ACM-W @ University of Washington
+
+# Write and test code in this code editor!
+# To run your code, press the green ▶ button
+# at the top of the screen. You'll see any output
+# in the console below.
+
+# ⬇⬇⬇⬇  WRITE CODE BELOW  ⬇⬇⬇⬇
+
+# Create a variable 'x' to store value 5
+x = 5
+# Change the value of 'x' to 6
+x = 6
+# Change the value of 'x' to 6 + 5 (6 is the old value of x)
+x = x + 5
+# Print the value of 'x' to the console!
+print(x)
+</div>
+                <div id ='outputWrapper'>
+                    <textarea id='output' disabled></textarea>
+                </div>
+            </div>
+
+        <script src="ace-builds/src/ace.js" type="text/javascript" charset="utf-8"></script>
+        <script>
+            var editor = ace.edit("editor");
+            editor.setTheme("ace/theme/tomorrow");
+            editor.setOptions({
+                 useSoftTabs: false,
+                 fadeFoldWidgets: true,
+            })
+            editor.session.setMode("ace/mode/python");
+            editor.focus();
+        </script>
+        <script>
+            const output = document.getElementById("output")
+
+            const today = new Date();
+            const months = ["January", "February", "March",
+                            "April", "May","June", "July",
+                            "August", "September", "October",
+                            "November", "December"];
+            var date = months[today.getMonth()] +' '+ today.getDate() +
+                        " " + today.getFullYear() + " " + today.toLocaleTimeString();
+            var alreadyLoadedOnce = false;
+            
+            // Delay function to make text display simulate a real console
+            function sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+
+            const runner = new BrythonRunner({
+                stdout: {
+                    write(content) {
+                        sleep(100).then(() => {
+                            output.value = content;
+                        })
+                    },
+                    flush() {},
+                },
+                stderr: {
+                    write(content) {
+                        sleep(100).then(() => {
+                            output.value = '';
+                            output.placeholder = content;
+                        })
+                    },
+                    flush() {},
+                },
+                onInit: function onInit() {
+                    if (!alreadyLoadedOnce) {
+                        output.value = `Python 3 (${date})\n\n`;
+                        sleep(1000).then(() => { 
+                            output.value = output.value.concat("Welcome to CS Explore Day!\nOutput will appear here when you run code.");
+                        });
+                        alreadyLoadedOnce = true;
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>
