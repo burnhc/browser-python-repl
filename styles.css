@@ -10,11 +10,12 @@
     padding: 10px 20px;
     color: #18c468;
     transition-duration: 0.4s;
+    cursor: pointer;
 }
   
 #runButton:hover {
-background-color: #18c468; /* Green */
-color: white;
+    background-color: #18c468; /* Green */
+    color: white;
 }
 
 #editorWrapper {
