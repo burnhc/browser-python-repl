@@ -11,17 +11,15 @@
     <body>
             <div id='editorWrapper'>
                 <div id='runButtonWrapper'>
-                    <button id='runButton' onclick='runner.runCode(editor.getValue())'>Run&nbsp;&nbsp;▶</button>
+                    <button id='runButton' onclick=runCode()>Run&nbsp;&nbsp;▶</button>
                 </div>
                 <div id="editor"># CS Explore Day: Escape Room
-# Hosted by ACM-W @ University of Washington
+# CS Explore Day by ACM-W @ UW
 
-# Write and test code in this code editor!
+# Write and run Python code in this editor.
 # To run your code, press the green ▶ button
-# at the top of the screen. You'll see any output
-# in the console below.
-
-# ⬇⬇⬇⬇  WRITE CODE BELOW  ⬇⬇⬇⬇
+# at the top of the screen. You'll see any print
+# output or errors in the console below.
 
 # Create a variable 'x' to store value 5
 x = 5
@@ -35,18 +33,17 @@ print(x)
 
         <script src="ace-builds/src/ace.js" type="text/javascript" charset="utf-8"></script>
         <script>
-            var editor = ace.edit("editor");
+            const editor = ace.edit("editor");
             editor.setTheme("ace/theme/tomorrow");
             editor.setOptions({
                  useSoftTabs: false,
                  fadeFoldWidgets: true,
-            })
+            });
+
             editor.session.setMode("ace/mode/python");
             editor.focus();
-        </script>
-        <script>
-            const output = document.getElementById("output")
 
+            const output = document.getElementById("output")
             const today = new Date();
             const months = ["January", "February", "March",
                             "April", "May","June", "July",
@@ -83,12 +80,19 @@ print(x)
                     if (!alreadyLoadedOnce) {
                         output.value = `Python 3 (${date})\n\n`;
                         sleep(1000).then(() => { 
-                            output.value = output.value.concat("Welcome to CS Explore Day!\nOutput will appear here when you run code.");
+                            output.value = output.value.concat(
+                                "Welcome to CS Explore Day!\nOutput will appear here when you run code."
+                            );
                         });
                         alreadyLoadedOnce = true;
                     }
                 }
             });
+
+            function runCode() {
+                output.value = '';
+                runner.runCode(editor.getValue());
+            }
         </script>
     </body>
 </html>
